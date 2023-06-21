@@ -31,6 +31,21 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct inst_s - variables -args, file, line content
+ * @op_code: opcode
+ * @arg: value
+ *
+ * Descrption: stores instructions.
+ */
+typedef struct inst_s
+{
+	char *op_code;
+	char *arg;
+}  inst_t;
+
+extern inst_t inst;
+
 /* ***** OPCODE FUNCTION PROTOTYPES ***** */
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);

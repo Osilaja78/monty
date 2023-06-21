@@ -5,6 +5,8 @@
 #include <string.h>
 #include <sys/types.h>
 
+inst_t inst = {NULL, NULL};
+
 /**
  * execute_instructions - main function to execute instructions.
  * @filename: name of monty file to find instructions
@@ -36,12 +38,14 @@ void execute_instructions(char *filename)
 		opcode = strtok(line, " \t\n");
 		if (opcode != NULL)
 		{
+			inst.op_code = opcode;
+			inst.arg = strtok(NULL, " \t\n");
 			opcode_function = find_instruction(opcode);
 			if (opcode_function != NULL)
 				opcode_function(&stack, line_number);
 			else
 			{
-				fprintf(stderr, "Error: Unknown instruction %s\n", opcode);
+				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 				free(line);
 				fclose(file);
 				exit(EXIT_FAILURE);
