@@ -78,6 +78,7 @@ void pint(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
 		fclose(inst.file);
 		free(inst.line);
+		free_s(*stack);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", (*stack)->n);
@@ -99,6 +100,7 @@ void pop(stack_t **stack, unsigned int line_number)
                 fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
                 fclose(inst.file);
                 free(inst.line);
+		free_s(*stack);
                 exit(EXIT_FAILURE);
         }
         
