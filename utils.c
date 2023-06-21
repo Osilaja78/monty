@@ -5,7 +5,7 @@
 #include <string.h>
 #include <sys/types.h>
 
-inst_t inst = {NULL, NULL};
+inst_t inst = {NULL, NULL, NULL, NULL};
 
 /**
  * execute_instructions - main function to execute instructions.
@@ -29,9 +29,11 @@ void execute_instructions(char *filename)
 		exit(EXIT_FAILURE);
 	}
 
+	inst.file = file;
 	while ((read = getline(&line, &len, file)) != -1)
 	{
 		line_number++;
+		inst.line = line;
 		opcode = strtok(line, " \t\n");
 		if (opcode != NULL)
 		{
@@ -69,6 +71,7 @@ void (*find_instruction(char *opcode))(stack_t **, unsigned int)
 	instruction_t instructions[] = {
 		{"push", push},
 		{"pall", pall},
+		{"pint", pint},
 		/* Add more opcodes and functions here */
 		{NULL, NULL}
 	};

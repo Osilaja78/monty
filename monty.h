@@ -1,6 +1,8 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+#include <stdio.h>
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -35,6 +37,8 @@ typedef struct instruction_s
  * struct inst_s - variables -args, file, line content
  * @op_code: opcode
  * @arg: value
+ * @file: monty filename
+ * @line: line to free
  *
  * Descrption: stores instructions.
  */
@@ -42,6 +46,8 @@ typedef struct inst_s
 {
 	char *op_code;
 	char *arg;
+	FILE *file;
+	char *line;
 }  inst_t;
 
 extern inst_t inst;
@@ -49,6 +55,7 @@ extern inst_t inst;
 /* ***** OPCODE FUNCTION PROTOTYPES ***** */
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
 
 /* ***** UTILITY FUNCTIONS ***** */
 void execute_instructions(char *filename);
