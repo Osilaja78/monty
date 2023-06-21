@@ -53,5 +53,6 @@ void pall(stack_t **stack, unsigned int line_number);
 /* ***** UTILITY FUNCTIONS ***** */
 void execute_instructions(char *filename);
 void (*find_instruction(char *opcode))(stack_t **, unsigned int);
+void free_s(stack_t *head);
 
 #endif

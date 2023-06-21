@@ -19,8 +19,8 @@ void execute_instructions(char *filename)
 	char *line = NULL, *opcode;
 	size_t len = 0;
 	ssize_t read;
-	unsigned int line_number;
-	stack_t *stack;
+	unsigned int line_number = 0;
+	stack_t *stack = NULL;
 	void (*opcode_function)(stack_t **, unsigned int);
 
 	if (file == NULL)
@@ -28,9 +28,6 @@ void execute_instructions(char *filename)
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
-
-	line_number = 0;
-	stack = NULL;
 
 	while ((read = getline(&line, &len, file)) != -1)
 	{
@@ -47,12 +44,14 @@ void execute_instructions(char *filename)
 			{
 				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 				free(line);
+				free_s(stack);
 				fclose(file);
 				exit(EXIT_FAILURE);
 			}
 		}
 	}
 	free(line);
+	free_s(stack);
 	fclose(file);
 }
 
@@ -81,4 +80,23 @@ void (*find_instruction(char *opcode))(stack_t **, unsigned int)
 	}
 
 	return (NULL);
+}
+
+/**
+ * free_s - frees a stack.
+ * @head: head of stack
+ *
+ * Return: nothing.
+ */
+void free_s(stack_t *head)
+{
+	stack_t *current = head;
+	stack_t *next;
+
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
 }
