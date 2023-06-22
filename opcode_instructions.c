@@ -14,13 +14,16 @@ void push(stack_t **stack, unsigned int line_number)
 	stack_t *new_node;
 	int num;
 
-	if (inst.arg == NULL || atoi(inst.arg) == 0)
+	if (strchr(inst.arg, '0') == NULL)
 	{
-		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		free_s(*stack);
-		free(inst.line);
-		fclose(inst.file);
-		exit(EXIT_FAILURE);
+		if (inst.arg == NULL || atoi(inst.arg) == 0)
+		{
+			fprintf(stderr, "L%u: usage: push integer\n", line_number);
+			free_s(*stack);
+			free(inst.line);
+			fclose(inst.file);
+			exit(EXIT_FAILURE);
+		}
 	}
 
 	new_node = malloc(sizeof(stack_t));
