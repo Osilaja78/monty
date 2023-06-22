@@ -83,7 +83,7 @@ void sub(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * div - dividess the 2nd top elem by the top elem in stack.
+ * f_div - divides the 2nd top elem by the top elem in stack.
  * @stack: pointer to the stack
  * @line_number: current line in monty file
  *
