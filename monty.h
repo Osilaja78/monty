@@ -70,5 +70,6 @@ void mod(stack_t **stack, unsigned int line_number);
 void execute_instructions(char *filename);
 void (*find_instruction(char *opcode))(stack_t **, unsigned int);
 void free_s(stack_t *head);
+void unknown_inst_error(unsigned int l, char *o, stack_t *s);
 
 #endif

@@ -44,18 +44,29 @@ void execute_instructions(char *filename)
 			if (opcode_function != NULL)
 				opcode_function(&stack, line_number);
 			else
-			{
-				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
-				free(line);
-				free_s(stack);
-				fclose(file);
-				exit(EXIT_FAILURE);
-			}
+				unknown_inst_error(line_number, opcode, stack);
 		}
 	}
 	free(line);
 	free_s(stack);
 	fclose(file);
+}
+
+/**
+ * unknown_inst_error - orints error for unknown opcode.
+ * @l: line number
+ * @o: opcode
+ * @s: stack
+ *
+ * Return: nothin.
+ */
+void unknown_inst_error(unsigned int l, char *o, stack_t *s)
+{
+	fprintf(stderr, "L%u: unknown instruction %s\n", l, o);
+	free(inst.line);
+	free_s(s);
+	fclose(inst.file);
+	exit(EXIT_FAILURE);
 }
 
 /**
