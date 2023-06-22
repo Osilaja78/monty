@@ -69,7 +69,7 @@ void sub(stack_t **stack, unsigned int line_number)
 
 	if (len < 2)
 	{
-		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+		fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
 		free(inst.line);
 		free_s(*stack);
 		fclose(inst.file);
