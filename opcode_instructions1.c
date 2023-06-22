@@ -35,3 +35,16 @@ void add(stack_t **stack, unsigned int line_number)
 	*stack = current->next;
 	free(current);
 }
+
+/**
+ * nop - does nothing.
+ * @stack: head of stack
+ * @line_number: current line in monty file
+ *
+ * Return: nothing.
+ */
+void nop(stack_t **stack, unsigned int line_number)
+{
+	(void) stack;
+	(void) line_number;
+}
