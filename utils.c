@@ -28,13 +28,14 @@ void execute_instructions(char *filename)
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
-
 	inst.file = file;
 	while ((read = getline(&line, &len, file)) != -1)
 	{
 		line_number++;
 		inst.line = line;
 		opcode = strtok(line, " \t\n");
+		if (strchr(opcode, '#') != NULL)
+			continue;
 		if (opcode != NULL)
 		{
 			inst.op_code = opcode;
@@ -69,17 +70,12 @@ void (*find_instruction(char *opcode))(stack_t **, unsigned int)
 	int i;
 
 	instruction_t instructions[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"swap", swap},
-		{"add", add},
-		{"nop", nop},
-		{"sub", sub},
-		{"div", f_div},
-		{"mul", mul}, {"mod", mod},
-		/* Add more opcodes and functions here */
+		{"push", push}, {"pall", pall},
+		{"pint", pint}, {"pop", pop},
+		{"swap", swap}, {"add", add},
+		{"nop", nop}, {"sub", sub},
+		{"div", f_div}, {"mul", mul},
+		{"mod", mod},
 		{NULL, NULL}
 	};
 
