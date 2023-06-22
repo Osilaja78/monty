@@ -1,6 +1,5 @@
 #include "monty.h"
 #include <stdio.h>
-#include <stdlib.h>
 
 /**
  * add - adds the top two elements of a stack.
@@ -78,6 +77,48 @@ void sub(stack_t **stack, unsigned int line_number)
 
 	current = *stack;
 	result = current->next->n - current->n;
+	current->next->n = result;
+	*stack = current->next;
+	free(current);
+}
+
+/**
+ * div - dividess the 2nd top elem by the top elem in stack.
+ * @stack: pointer to the stack
+ * @line_number: current line in monty file
+ *
+ * Return: nothing.
+ */
+void f_div(stack_t **stack, unsigned int line_number)
+{
+	stack_t *current, *temp = *stack;
+	int len, result;
+
+	while (temp != NULL)
+	{
+		len++;
+		temp = temp->next;
+	}
+
+	if (len < 2)
+	{
+		fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
+		free(inst.line);
+		free_s(*stack);
+		fclose(inst.file);
+		exit(EXIT_FAILURE);
+	}
+
+	current = *stack;
+	if (current->n == 0)
+	{
+		fprintf(stderr, "L%u: division by zero\n", line_number);
+		free(inst.line);
+		free_s(*stack);
+		fclose(inst.file);
+		exit(EXIT_FAILURE);
+	}
+	result = current->next->n / current->n;
 	current->next->n = result;
 	*stack = current->next;
 	free(current);

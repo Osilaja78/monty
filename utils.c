@@ -77,6 +77,7 @@ void (*find_instruction(char *opcode))(stack_t **, unsigned int)
 		{"add", add},
 		{"nop", nop},
 		{"sub", sub},
+		{"div", f_div},
 		/* Add more opcodes and functions here */
 		{NULL, NULL}
 	};
