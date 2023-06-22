@@ -86,7 +86,7 @@ void (*find_instruction(char *opcode))(stack_t **, unsigned int)
 		{"swap", swap}, {"add", add},
 		{"nop", nop}, {"sub", sub},
 		{"div", f_div}, {"mul", mul},
-		{"mod", mod},
+		{"mod", mod}, {"pchar", pchar},
 		{NULL, NULL}
 	};
 
