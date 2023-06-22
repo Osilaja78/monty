@@ -95,15 +95,47 @@ void pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
 
-        if (stack == NULL)
-        {
-                fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
-                fclose(inst.file);
-                free(inst.line);
+	if (stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		fclose(inst.file);
+		free(inst.line);
 		free_s(*stack);
-                exit(EXIT_FAILURE);
-        }
-        
+		exit(EXIT_FAILURE);
+	}
+
 	*stack = current->next;
 	free(current);
+}
+
+/**
+ * swap - swaps the top two elements of a stack.
+ * @stack: pointer to the stack
+ * @line_number: current line in monty file
+ *
+ * Return: nothing.
+ */
+void swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *current, *temp = *stack;
+	int len, i;
+
+	while (temp != NULL)
+	{
+		len++;
+		temp = temp->next;
+	}
+
+	if (len < 2)
+	{
+		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+		free(inst.line);
+		free_s(*stack);
+		fclose(inst.file);
+		exit(EXIT_FAILURE);
+	}
+	current = *stack;
+	i = current->n;
+	current->n = current->next->n;
+	current->next->n = i;
 }
